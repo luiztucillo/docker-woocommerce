@@ -6,6 +6,12 @@ ENV USERNAME=$username
 ARG domain
 ENV DOMAIN=$domain
 
+ARG cert_path
+ENV CERT_PATH=$cert_path
+
+ARG cert_key_path
+ENV CERT_KEY_PATH=$cert_key_path
+
 #set folder owner
 RUN mkdir -p /var/www/html
 RUN useradd -m $USERNAME
@@ -15,6 +21,9 @@ RUN chown -R $USERNAME:$USERNAME /var/www/html
 RUN rm -rf /var/www/html/*
 
 COPY conf/nginx.conf /etc/nginx/
-RUN echo "set \$username $USERNAME;\nset \$domain $DOMAIN;" > /etc/nginx/var.conf
-RUN echo "user $USERNAME;\n$(cat /etc/nginx/nginx.conf)" > /etc/nginx/nginx.conf
-RUN cat /etc/nginx/nginx.conf
+
+RUN echo "set \$username $USERNAME;\n" >> /etc/nginx/var.conf
+RUN echo "set \$domain $DOMAIN;\n" >> /etc/nginx/var.conf
+
+RUN echo "ssl_certificate $CERT_PATH;\n" >> /etc/nginx/ssl.conf
+RUN echo "ssl_certificate_key $CERT_KEY_PATH;\n" >> /etc/nginx/ssl.conf

@@ -1,15 +1,13 @@
 #!/bin/bash
 
-DB_NAME=wordpress
-DB_PASSWORD=1234qwer
 LOCALIZATION=pt_BR
 WP_VERSION=latest
 URL=wordpress.local
 
-docker exec -u0 wordpress_php chown -R $USERNAME: wp-content
+docker exec -u0 wordpress_php rm -rf /var/www/html
 
-echo -e "\nCreating database"
-docker exec wordpress_mysql mysql -uroot -p$DB_PASSWORD -e "CREATE DATABASE IF NOT EXISTS $DB_NAME"
+docker exec -u0 wordpress_php chown -R $USERNAME: /var/www/html
 
 echo -e "\nDownloading"
+docker exec wordpress_php pwd
 docker exec wordpress_php wp core download --locale=$LOCALIZATION --version=$WP_VERSION
