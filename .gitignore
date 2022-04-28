@@ -1,5 +1,5 @@
 data/
 .env
 .idea
-plugins/
-src/
+plugins/*
+src/*

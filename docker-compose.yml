@@ -35,8 +35,8 @@ services:
                 username: ${USERNAME}
                 host_os: ${HOST_OS}
         container_name: wordpress_php
-        links:
-            - mysql
+        # links:
+            # - mysql
         volumes:
           - ./src:/var/www/html
           - ./plugins:/var/www/html/wp-content/plugins
@@ -48,17 +48,17 @@ services:
             - WP_TESTS_DIR=/var/www/html/tests
             - PHP_IDE_CONFIG="serverName=Docker"
 
-    mysql:
-        image: mysql:5.7
-        container_name: wordpress_mysql
-        ports:
-            - 3306:3306
-        environment:
-            MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
-        volumes:
-          - ./data:/var/lib/mysql:delegated
-        networks:
-            - mynetwork
+    # mysql:
+    #     image: mysql:5.7
+    #     container_name: wordpress_mysql
+    #     ports:
+    #         - 3306:3306
+    #     environment:
+    #         MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+    #     volumes:
+    #       - ./data:/var/lib/mysql:delegated
+    #     networks:
+    #         - mynetwork
 
     mailhog:
         image: mailhog/mailhog
