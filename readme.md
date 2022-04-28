@@ -2,9 +2,9 @@
 
 ## Uso
 
-1 - Crie um arquivo chamado .env usando de base o arquivo .env.sample  
+1 - Crie um arquivo chamado .env usando de base o arquivo .env.sample: `cp .env.sample .env`
 
-2 - Defina o usuário neste arquivo para o mesmo do seu sistema
+2 - Defina o usuário neste arquivo para o mesmo do seu sistema. Geralmente `ubuntu`
 
 3 - Defina a URL neste arquivo para o seu domínio
 
@@ -14,8 +14,7 @@
 
 6 - `docker-compose up -d --build` para executar os containers
 
-7 - Para instalar o wpcli no container execute o helper sh:  
-`bash helpers/wordpress/install-wpcli.sh`
+7 - Para instalar o wp no container execute o helper sh:  
+`bash helpers/wordpress/install-wpcli.sh && bash helpers/wordpress/install-wp.sh`
 
-8 - Para baixar a última versão do wordpress execute o helper sh:  
-`bash helpers/wordpress/install-wp.sh`
+Se tiver o erro `Error: '/var/www/html/' is not writable by current user` execute `sudo chown -R $USER: src` e execute o comando 7 novamente.
